@@ -47,12 +47,15 @@ private[pulsar] object PulsarOptions {
   val POLL_TIMEOUT_MS = "polltimeoutms"
   val FAIL_ON_DATA_LOSS_OPTION_KEY = "failondataloss"
 
-  val AUTH_PLUGIN_CLASS_NAME = "authpluginclassname"
-  val AUTH_PARAMS = "authparams"
-  val TLS_TRUST_CERTS_FILE_PATH = "tlstrustcertsfilepath"
-  val TLS_ALLOW_INSECURE_CONNECTION = "tlsallowinsecureconnection"
-  val USE_TLS = "usetls"
-  val TLS_HOSTNAME_VERIFICATION_ENABLE = "tlshostnameverificationenable"
+  /**
+   * Client options
+   */
+  val AUTH_PLUGIN_CLASS_NAME = "authPluginClassName"
+  val AUTH_PARAMS = "authParams"
+  val TLS_TRUST_CERTS_FILE_PATH = "tlsTrustCertsFilePath"
+  val TLS_ALLOW_INSECURE_CONNECTION = "tlsAllowInsecureConnection"
+  val USE_TLS = "useTls"
+  val TLS_HOSTNAME_VERIFICATION_ENABLE = "tlsHostnameVerificationEnable"
 
 
   val INSTRUCTION_FOR_FAIL_ON_DATA_LOSS_FALSE =
