@@ -23,23 +23,27 @@ object AdminUtils {
 
   def buildAdmin(adminUrl: String, clientConf: ju.Map[String, Object]): PulsarAdmin = {
     val builder = PulsarAdmin.builder().serviceHttpUrl(adminUrl)
-
-    if (clientConf.containsKey(AUTH_PLUGIN_CLASS_NAME)) {
+    val clientConfKeys = PulsarConfigurationUtils.clientConfKeys
+    val caseSensitiveAuthPlugin = clientConfKeys.getOrElse(AUTH_PLUGIN_CLASS_NAME,"")
+    if (clientConf.containsKey(caseSensitiveAuthPlugin)) {
       builder.authentication(
         clientConf.get(AUTH_PLUGIN_CLASS_NAME).toString, clientConf.get(AUTH_PARAMS).toString)
     }
 
-    if (clientConf.containsKey(TLS_ALLOW_INSECURE_CONNECTION)) {
+    val caseSensitiveTLSInsecure = clientConfKeys.getOrElse(TLS_ALLOW_INSECURE_CONNECTION,"")
+    if (clientConf.containsKey(caseSensitiveTLSInsecure)) {
       builder.allowTlsInsecureConnection(
         clientConf.get(TLS_ALLOW_INSECURE_CONNECTION).toString.toBoolean)
     }
 
-    if (clientConf.containsKey(TLS_HOSTNAME_VERIFICATION_ENABLE)) {
+    val caseSensitiveTLSVerification = clientConfKeys.getOrElse(TLS_HOSTNAME_VERIFICATION_ENABLE, "")
+    if (clientConf.containsKey(caseSensitiveTLSVerification)) {
       builder.enableTlsHostnameVerification(
         clientConf.get(TLS_HOSTNAME_VERIFICATION_ENABLE).toString.toBoolean)
     }
 
-    if (clientConf.containsKey(TLS_TRUST_CERTS_FILE_PATH)) {
+    val caseSensitiveTrustPath = clientConfKeys.getOrElse(TLS_TRUST_CERTS_FILE_PATH, "")
+    if (clientConf.containsKey(caseSensitiveTrustPath)) {
       builder.tlsTrustCertsFilePath(clientConf.get(TLS_TRUST_CERTS_FILE_PATH).toString)
     }
 
